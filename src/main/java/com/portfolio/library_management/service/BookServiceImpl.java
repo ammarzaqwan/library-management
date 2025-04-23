@@ -11,6 +11,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
@@ -35,6 +38,17 @@ public class BookServiceImpl implements BookService {
 
     }
 
+    }
+
+    @Override
+    public List<BookResDTO> getAllBooks(){
+        List<Book> book = repository.findAll();
+        if (book.isEmpty()) {
+            throw new ApiException("No book found", HttpStatus.NOT_FOUND);
+        }
+        return book.stream()
+                .map(mapper::toDto)
+                .collect(Collectors.toList());
     }
 
 }

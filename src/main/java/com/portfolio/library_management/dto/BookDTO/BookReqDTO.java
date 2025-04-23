@@ -1,5 +1,6 @@
 package com.portfolio.library_management.dto.BookDTO;
 
+import com.portfolio.library_management.model.Book.BookStatus;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,7 +21,7 @@ public class BookReqDTO {
     private int publishedYear;
 
     private String description;
-    private String BookStatus;
+    private BookStatus status;
     private String count;
 
 

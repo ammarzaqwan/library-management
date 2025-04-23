@@ -1,6 +1,7 @@
 package com.portfolio.library_management.dto.BookDTO;
 
 
+import com.portfolio.library_management.model.Book.BookStatus;
 import lombok.Data;
 
 @Data
@@ -13,7 +14,7 @@ public class BookResDTO {
         private String genre;
         private int publishedYear;
         private String description;
-        private String BookStatus;
+        private BookStatus status;
         private String count;
 
 
