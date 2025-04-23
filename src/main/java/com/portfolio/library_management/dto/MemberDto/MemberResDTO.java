@@ -1,7 +1,7 @@
 package com.portfolio.library_management.dto.MemberDto;
 
-import com.portfolio.library_management.model.MemberStatus;
-import com.portfolio.library_management.model.Role;
+import com.portfolio.library_management.model.Member.MemberStatus;
+import com.portfolio.library_management.model.Member.Role;
 import lombok.Data;
 
 import java.util.UUID;

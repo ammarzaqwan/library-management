@@ -1,5 +1,8 @@
 package com.portfolio.library_management.model;
 
+import com.portfolio.library_management.model.Book.Book;
+import com.portfolio.library_management.model.Book.BookStatus;
+import com.portfolio.library_management.model.Member.Member;
 import jakarta.persistence.*;
 import lombok.*;
 

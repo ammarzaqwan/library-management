@@ -2,7 +2,6 @@ package com.portfolio.library_management.controller;
 
 import com.portfolio.library_management.dto.MemberDto.MemberReqDTO;
 import com.portfolio.library_management.dto.MemberDto.MemberResDTO;
-import com.portfolio.library_management.model.Member;
 import com.portfolio.library_management.service.MemberService;
 import com.portfolio.library_management.utils.ApiResponse;
 import com.portfolio.library_management.utils.Record;
@@ -13,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 
@@ -40,6 +38,7 @@ public class MemberController {
     @GetMapping ("/api/public/members")
     public ResponseEntity<ApiResponse<List<MemberResDTO>>> getAllMembers() {
         List<MemberResDTO> member = service.getAllMembers();
+
         ApiResponse<List<MemberResDTO>> response = new ApiResponse<>(
                 Record.RETRIEVE.getMessage(),
                 member,

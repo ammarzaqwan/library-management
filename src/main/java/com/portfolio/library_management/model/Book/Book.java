@@ -1,6 +1,7 @@
-package com.portfolio.library_management.model;
+package com.portfolio.library_management.model.Book;
 
 
+import com.portfolio.library_management.model.BaseModel;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -48,5 +49,17 @@ public class Book extends BaseModel {
     // Number of copies currently borrowed (to check availability)
     @Column(nullable = false)
     private int borrowedCount;
+
+    @PrePersist
+    public void prePersist() {
+        if (this.status == null){
+            this.status = BookStatus.AVAILABLE;
+        }
+
+        //Primitive value , always default to 0 so no need
+//        if(this.borrowedCount==null){
+//            this.borrowedCount = 0;
+//        }
+    }
 
 }

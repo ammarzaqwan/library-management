@@ -1,5 +1,6 @@
-package com.portfolio.library_management.model;
+package com.portfolio.library_management.model.Member;
 
+import com.portfolio.library_management.model.BaseModel;
 import jakarta.persistence.*;
 import lombok.*;
 

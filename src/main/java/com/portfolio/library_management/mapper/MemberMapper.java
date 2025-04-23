@@ -3,10 +3,8 @@ package com.portfolio.library_management.mapper;
 
 import com.portfolio.library_management.dto.MemberDto.MemberReqDTO;
 import com.portfolio.library_management.dto.MemberDto.MemberResDTO;
-import com.portfolio.library_management.model.Member;
+import com.portfolio.library_management.model.Member.Member;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
 public interface MemberMapper {

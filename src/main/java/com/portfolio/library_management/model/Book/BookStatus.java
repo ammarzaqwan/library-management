@@ -1,4 +1,4 @@
-package com.portfolio.library_management.model;
+package com.portfolio.library_management.model.Book;
 
 
 public enum BookStatus {

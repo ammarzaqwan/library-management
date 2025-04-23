@@ -3,11 +3,13 @@ package com.portfolio.library_management.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
+import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
 
+@Getter
 @MappedSuperclass
 public abstract class BaseModel {
 
@@ -19,12 +21,5 @@ public abstract class BaseModel {
     @Column(nullable = false)
     private Instant updatedAt;
 
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public Instant getUpdatedAt() {
-        return updatedAt;
-    }
 }
 

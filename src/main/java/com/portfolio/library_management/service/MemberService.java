@@ -2,12 +2,8 @@ package com.portfolio.library_management.service;
 
 import com.portfolio.library_management.dto.MemberDto.MemberReqDTO;
 import com.portfolio.library_management.dto.MemberDto.MemberResDTO;
-import com.portfolio.library_management.model.Member;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 public interface MemberService {
