@@ -1,14 +1,21 @@
 package com.portfolio.library_management.service;
 
-import com.portfolio.library_management.dto.MemberReqDTO;
-import com.portfolio.library_management.dto.MemberResDTO;
+import com.portfolio.library_management.dto.MemberDto.MemberReqDTO;
+import com.portfolio.library_management.dto.MemberDto.MemberResDTO;
+import com.portfolio.library_management.exception.ApiException;
 import com.portfolio.library_management.mapper.MemberMapper;
 import com.portfolio.library_management.model.Member;
 import com.portfolio.library_management.model.MemberStatus;
 import com.portfolio.library_management.model.Role;
 import com.portfolio.library_management.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -21,19 +28,42 @@ public  class MemberServiceImpl implements MemberService {
     public MemberResDTO addMember(MemberReqDTO dto) {
 
         if (repository.findByEmail(dto.getEmail()).isPresent()) {
-            throw new RuntimeException("Email already exists: " + dto.getEmail());
+            throw new ApiException("Email already exists", HttpStatus.BAD_REQUEST);
         }
         Member member = mapper.toEntity(dto);
 
-        if (member.getRole() == null) member.setRole(Role.ROLE_USER);
-        if (member.getStatus() == null) member.setStatus(MemberStatus.ACTIVE);
-        if (member.getBorrowLimit() == 0) member.setBorrowLimit(5);
-        if (member.getLateFees() == 0.0) member.setLateFees(0.0);
-        if (!member.isEmailVerified()) member.setEmailVerified(false);
         member.setAuthProvider("LOCAL");
 
-        Member saved = repository.save(member);
-        return mapper.toDto(saved);
+        try {
+            Member saved = repository.save(member);
+            return mapper.toDto(saved);
+        } catch (DataIntegrityViolationException e) {
+            throw new ApiException("Email or phone number already exists", HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
+    public List<MemberResDTO> getAllMembers() {
+        List<Member> members = repository.findAll();
+        if (members.isEmpty()) {
+            throw new ApiException("No members found", HttpStatus.NOT_FOUND);
+        }
+        return members.stream()
+                .map(mapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    public MemberResDTO getMembers(UUID id) {
+        Member member = repository.findById(id)
+                .orElseThrow(() -> new  ApiException("Email already exists", HttpStatus.BAD_REQUEST));
+
+        return mapper.toDto(member);
+    }
+
+    public void deleteMember(UUID id) {
+        Member member = repository.findById(id)
+                .orElseThrow(() -> new ApiException("Member not found", HttpStatus.NOT_FOUND));
+        repository.delete(member);
     }
 
 

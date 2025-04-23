@@ -1,8 +1,8 @@
 package com.portfolio.library_management.mapper;
 
 
-import com.portfolio.library_management.dto.MemberReqDTO;
-import com.portfolio.library_management.dto.MemberResDTO;
+import com.portfolio.library_management.dto.MemberDto.MemberReqDTO;
+import com.portfolio.library_management.dto.MemberDto.MemberResDTO;
 import com.portfolio.library_management.model.Member;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
