@@ -27,7 +27,20 @@ public class MemberController {
         MemberResDTO member = service.addMember(dto);
 
         ApiResponse<MemberResDTO> response = new ApiResponse<>(
-                "Member created successfully",
+                Record.CREATE.getMessage(),
+                member,
+                HttpStatus.CREATED.value()
+        );
+
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/api/public/members/{uuid}")
+    public ResponseEntity<ApiResponse<MemberResDTO>> updMember(@PathVariable UUID uuid,@RequestBody MemberReqDTO dto) {
+        MemberResDTO member = service.updMember(uuid,dto);
+
+        ApiResponse<MemberResDTO> response = new ApiResponse<>(
+                Record.UPDATE.getMessage(),
                 member,
                 HttpStatus.CREATED.value()
         );
@@ -49,16 +62,27 @@ public class MemberController {
     }
 
     @GetMapping ("/api/public/members/{uuid}")
-    public ResponseEntity<MemberResDTO>  getMembers(@PathVariable UUID uuid){
-        return new ResponseEntity<>(service.getMembers(uuid), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<MemberResDTO>>  getMembers(@PathVariable UUID uuid){
+        MemberResDTO member = service.getMembers(uuid);
+        ApiResponse<MemberResDTO> response = new ApiResponse<>(
+                Record.RETRIEVE.getMessage(),
+                member,
+                HttpStatus.OK.value()
+        );
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
     @DeleteMapping ("/api/public/members/{uuid}")
-    public ResponseEntity<Void> deleteMember(@PathVariable UUID uuid) {
-        // Call the service layer to delete the member
+    public ResponseEntity<ApiResponse<Void>> deleteMember(@PathVariable UUID uuid) {
+
         service.deleteMember(uuid);
 
-        // Return HTTP 204 No Content on successful deletion
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        ApiResponse<Void> response = new ApiResponse<>(
+                Record.DELETE.getMessage(),
+                null,
+                HttpStatus.OK.value()
+        );
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 

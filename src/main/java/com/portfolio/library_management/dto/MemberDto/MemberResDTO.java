@@ -8,7 +8,6 @@ import java.util.UUID;
 
 @Data
 public class MemberResDTO {
-    private UUID id;
     private String email;
     private String name;
     private String phoneNumber;

@@ -53,11 +53,26 @@ public  class MemberServiceImpl implements MemberService {
 
     public MemberResDTO getMembers(UUID id) {
         Member member = repository.findById(id)
-                .orElseThrow(() -> new  ApiException("Email already exists", HttpStatus.BAD_REQUEST));
+                .orElseThrow(() -> new  ApiException("Member not exist", HttpStatus.BAD_REQUEST));
 
         return mapper.toDto(member);
     }
 
+    public MemberResDTO updMember(UUID id, MemberReqDTO dto) {
+        Member member = repository.findById(id)
+                .orElseThrow(() -> new ApiException("Member not exist", HttpStatus.BAD_REQUEST));
+
+        member.setEmail(dto.getEmail());
+        member.setName(dto.getName());
+        member.setPhoneNumber(dto.getPhoneNumber());
+
+        try {
+            Member saved = repository.save(member);
+            return mapper.toDto(saved);
+        } catch (DataIntegrityViolationException e) {
+            throw new ApiException("Email or phone number already exists", HttpStatus.BAD_REQUEST);
+        }
+    }
     public void deleteMember(UUID id) {
         Member member = repository.findById(id)
                 .orElseThrow(() -> new ApiException("Member not found", HttpStatus.NOT_FOUND));
