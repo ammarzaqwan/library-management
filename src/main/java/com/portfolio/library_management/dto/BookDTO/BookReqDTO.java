@@ -23,6 +23,7 @@ public class BookReqDTO {
     private String description;
     private BookStatus status;
     private String count;
+    private int borrowedCount;
 
 
 }

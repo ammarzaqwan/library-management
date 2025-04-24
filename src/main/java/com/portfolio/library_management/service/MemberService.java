@@ -11,6 +11,6 @@ public interface MemberService {
    List<MemberResDTO> getAllMembers() ;
     MemberResDTO addMember(MemberReqDTO dto);
     MemberResDTO getMembers(UUID uuid);
-void deleteMember(UUID uuid);
+    void deleteMember(UUID uuid);
     MemberResDTO updMember(UUID id, MemberReqDTO dto);
  }
