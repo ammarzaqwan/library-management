@@ -33,8 +33,8 @@ public class BookController {
         );
         return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
-
-    @GetMapping("/api/public/books")
+    //@GetMapping("/api/public/books")
+    @GetMapping("/api/books")
     public ResponseEntity<ApiResponse<List<BookResDTO>>> getAllBooks(){
         List<BookResDTO> books = service.getAllBooks();
 

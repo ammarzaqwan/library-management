@@ -88,7 +88,7 @@ public class MemberController {
 
 
 
-    @GetMapping("/hello")
+    @GetMapping("/")
     public ResponseEntity<String> sayHello() {
         return ResponseEntity.ok("Hello, world!");
     }

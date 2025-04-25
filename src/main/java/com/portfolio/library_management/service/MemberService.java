@@ -2,6 +2,8 @@ package com.portfolio.library_management.service;
 
 import com.portfolio.library_management.dto.MemberDto.MemberReqDTO;
 import com.portfolio.library_management.dto.MemberDto.MemberResDTO;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
 import java.util.UUID;
@@ -13,4 +15,5 @@ public interface MemberService {
     MemberResDTO getMembers(UUID uuid);
     void deleteMember(UUID uuid);
     MemberResDTO updMember(UUID id, MemberReqDTO dto);
- }
+
+}
